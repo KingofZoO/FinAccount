@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="FinAccount.Views.SumEntryPage"
+             xmlns:convert="clr-namespace:FinAccount.Converters"
+             Title="Новая запись">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="CornerRadius" Value="20"/>
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+
+            <convert:BoolToColorConverter x:Key="BoolToColor"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackLayout Grid.Row="0"
+                     VerticalOptions="Center">
+            <Label Text="{Binding EnteredSum}"
+                   TextColor="{Binding IsPositive, Converter={StaticResource BoolToColor}}"/>
+            <Label Text="{Binding EnteredNote}"/>
+        </StackLayout>
+
+        <Grid Grid.Row="1">
+            <Button Text="1"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Command="{Binding AddSymbolCommand}"
+                    CommandParameter="1"/>
+            <Button Text="2"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Command="{Binding AddSymbolCommand}"
+                    CommandParameter="2"/>
+            <Button Text="3"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Command="{Binding AddSymbolCommand}"
+                    CommandParameter="3"/>
+            <Button Text="4"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Command="{Binding AddSymbolCommand}"
+                    CommandParameter="4"/>
+            <Button Text="5"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Command="{Binding AddSymbolCommand}"
+                    CommandParameter="5"/>
+            <Button Text="6"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Command="{Binding AddSymbolCommand}"
+                    CommandParameter="6"/>
+            <Button Text="7"
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Command="{Binding AddSymbolCommand}"
+                    CommandParameter="7"/>
+            <Button Text="8"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Command="{Binding AddSymbolCommand}"
+                    CommandParameter="8"/>
+            <Button Text="9"
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    Command="{Binding AddSymbolCommand}"
+                    CommandParameter="9"/>
+            <Button Text=","
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Command="{Binding AddSymbolCommand}"
+                    CommandParameter=","/>
+            <Button Text="0"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Command="{Binding AddSymbolCommand}"
+                    CommandParameter="0"/>
+            <Button Text="Del"
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    Command="{Binding RemoveSymbolCommand}"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Picker Grid.Column="0"
+                    Title="Выбрать категорию"
+                    ItemsSource="{Binding MainViewModel.NoteList}"
+                    SelectedItem="{Binding EnteredNote}"/>
+            <Button Grid.Column="1"
+                    Text="-"
+                    Command="{Binding RemoveNoteCommand}"/>
+            <Button Grid.Column="2"
+                    Text="+"
+                    Command="{Binding AddNoteCommand}"/>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Button Text="Добавить запись"
+                    FontSize="Default"
+                    Grid.Column="0"
+                    Command="{Binding ApplyCommand}"
+                    CornerRadius="0"/>
+            <Button Text="Назад"
+                    FontSize="Default"
+                    Grid.Column="1"
+                    Command="{Binding MainViewModel.BackCommand}"
+                    CornerRadius="0"/>
+        </Grid>
+    </Grid>
+</ContentPage>

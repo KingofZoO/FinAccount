@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="FinAccount.Views.MainPage"
+             xmlns:convert="clr-namespace:FinAccount.Converters"
+             Title="FinAccount">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+
+            <ResourceDictionary>
+                <convert:SignToColorConverter x:Key="SignToColor"/>
+            </ResourceDictionary>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ListView ItemsSource="{Binding MonthRecords}"
+                      HasUnevenRows="True"
+                      Grid.Row="0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell IsEnabled="False">
+                            <ViewCell.View>
+                                <Grid>
+                                    <Label Text="{Binding DateToString}"
+                                           Grid.Column="0"/>
+                                    <Label Text="{Binding Sum}"
+                                           TextColor="{Binding Sum, Converter={StaticResource SignToColor}}"
+                                           Grid.Column="1"/>
+                                    <Label Text="{Binding Note}"
+                                           Grid.Column="2"/>
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Grid Grid.Row="1">
+                <BoxView HeightRequest="1"
+                         Grid.ColumnSpan="3"
+                         BackgroundColor="LightGray"/>
+                <Label Text="{Binding PositiveSum}"
+                       TextColor="Green"
+                       FontSize="Medium"
+                       Grid.Column="0"/>
+                <Label Text="{Binding NegativeSum}"                   
+                       TextColor="Red"
+                       FontSize="Medium"
+                       Grid.Column="1"/>
+                <Label Text="{Binding DifferenceSum}"
+                       TextColor="Blue"
+                       FontSize="Medium"
+                       Grid.Column="2"/>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Button Text="Баланс"
+                        Grid.Column="0"
+                        Command="{Binding EditTotalSumCommand}"/>
+                <Button Text="История"
+                        Grid.Column="1"
+                        Command="{Binding ShowHistoryCommand}"/>
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Button Text="+"
+                        FontSize="Large"
+                        Grid.Column="0"
+                        Command="{Binding AddCommand}"/>
+                <Button Text="-"
+                        FontSize="Large"
+                        Grid.Column="1"
+                        Command="{Binding SubtractCommand}"/>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
