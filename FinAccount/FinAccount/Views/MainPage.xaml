@@ -31,11 +31,19 @@
             </Grid.RowDefinitions>
 
             <ListView ItemsSource="{Binding MonthRecords}"
+                      x:Name="CellList"
                       HasUnevenRows="True"
-                      Grid.Row="0">
+                      Grid.Row="0"
+                      SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell IsEnabled="False">
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Удалить"
+                                          Command="{Binding Source={Reference CellList}, Path=BindingContext.RemoveRecordCommand}"
+                                          CommandParameter="{Binding}"/>
+                            </ViewCell.ContextActions>
+                            
                             <ViewCell.View>
                                 <Grid>
                                     <Label Text="{Binding DateToString}"

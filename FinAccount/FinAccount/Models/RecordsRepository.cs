@@ -31,6 +31,10 @@ namespace FinAccount.Models {
                 database.Insert(record);
         }
 
+        public void DeleteRecord(FinRecord record) {
+            database.Delete<FinRecord>(record.Id);
+        }
+
         public void DropHistory() {
             database.DropTable<FinRecord>();
             database.CreateTable<FinRecord>();

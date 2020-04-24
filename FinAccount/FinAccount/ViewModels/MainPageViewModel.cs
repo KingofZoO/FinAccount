@@ -25,6 +25,7 @@ namespace FinAccount.ViewModels {
 
         public ICommand AddCommand { get; private set; }
         public ICommand SubtractCommand { get; private set; }
+        public ICommand RemoveRecordCommand { get; private set; }
 
         public ICommand EditTotalSumCommand { get; private set; }
         public ICommand ShowHistoryCommand { get; private set; }
@@ -36,7 +37,7 @@ namespace FinAccount.ViewModels {
             //---------------------------FillDataBase();
 
             MonthRecords = new ObservableCollection<FinRecord>(App.DataBase.MonthRecords());
-            MonthRecords.CollectionChanged += (s, e) => ChangeSums();
+            MonthRecords.CollectionChanged += (s, e) => CalculateSums();
             CalculateSums();
 
             NoteList.CollectionChanged += (s, e) => {
@@ -50,6 +51,7 @@ namespace FinAccount.ViewModels {
 
             AddCommand = new Command(AddSum);
             SubtractCommand = new Command(SubtractSum);
+            RemoveRecordCommand = new Command<FinRecord>(RemoveRecord);
             EditTotalSumCommand = new Command(EditTotalSum);
             ShowHistoryCommand = new Command(ShowHistory);
             BackCommand = new Command(Back);
@@ -135,27 +137,21 @@ namespace FinAccount.ViewModels {
 
         private void Back() => Navigation.PopAsync();
 
+        private void RemoveRecord(FinRecord cell) {
+            MonthRecords.Remove(cell);
+            App.DataBase.DeleteRecord(cell);
+            TotalSum -= cell.Sum;
+        }
+
         private void CalculateSums() {
+            PositiveSum = 0;
+            NegativeSum = 0;
+
             foreach (var record in MonthRecords) {
                 if (record.Sum >= 0)
                     PositiveSum += record.Sum;
                 else
                     NegativeSum += record.Sum;
-            }
-            DifferenceSum = PositiveSum + NegativeSum;
-        }
-
-        private void ChangeSums() {
-            if (MonthRecords.Count == 0) {
-                PositiveSum = 0;
-                NegativeSum = 0;
-            }
-            else {
-                var tempSum = MonthRecords[MonthRecords.Count - 1].Sum;
-                if (tempSum > 0)
-                    PositiveSum += tempSum;
-                else
-                    NegativeSum += tempSum;
             }
             DifferenceSum = PositiveSum + NegativeSum;
         }

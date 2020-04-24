@@ -10,7 +10,13 @@
 
     <item name="colorPrimaryDark">#408040</item>
     <item name="colorAccent">#4CAF50</item>
+
+    <item name="actionModeBackground">@color/ActionBackgroundColor</item>
+    <item name="android:colorLongPressedHighlight">@color/LongPressHighlightColor</item>
     
     <item name="windowActionModeOverlay">true</item>
   </style>
+
+  <color name="ActionBackgroundColor">#4CAF50</color>
+  <color name="LongPressHighlightColor">#A5D6A7</color>
 </resources>

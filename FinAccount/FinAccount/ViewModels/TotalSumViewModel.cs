@@ -30,7 +30,7 @@ namespace FinAccount.ViewModels {
         }
 
         private async void SetTotalSum() {
-            if (decimal.TryParse(EnteredSum.ToString(), out decimal res)) {
+            if (decimal.TryParse(EnteredSum.Replace('.', ',').ToString(), out decimal res)) {
                 bool result = await Application.Current.MainPage.DisplayAlert("Подтвердить действие", "Изменить баланс?", "Да", "Нет");
                 if (result) {
                     MainViewModel.TotalSum = res;
