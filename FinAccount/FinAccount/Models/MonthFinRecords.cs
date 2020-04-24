@@ -15,6 +15,8 @@ namespace FinAccount.Models {
                     NegativeSum += sum;
             }
 
+            PositiveSum = decimal.Round(PositiveSum);
+            NegativeSum = decimal.Round(NegativeSum);
             DiffSum = PositiveSum + NegativeSum;
         }
     }

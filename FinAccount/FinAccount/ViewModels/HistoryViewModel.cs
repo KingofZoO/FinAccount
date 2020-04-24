@@ -81,7 +81,7 @@ namespace FinAccount.ViewModels {
             get => totalPositiveSum;
             set {
                 if (totalPositiveSum != value) {
-                    totalPositiveSum = value;
+                    totalPositiveSum = decimal.Round(value);
                     OnPropertyChanged("TotalPositiveSum");
                 }
             }
@@ -91,7 +91,7 @@ namespace FinAccount.ViewModels {
             get => totalNegativeSum;
             set {
                 if (totalNegativeSum != value) {
-                    totalNegativeSum = value;
+                    totalNegativeSum = decimal.Round(value);
                     OnPropertyChanged("TotalNegativeSum");
                 }
             }
@@ -101,7 +101,7 @@ namespace FinAccount.ViewModels {
             get => totalDifferenceSum;
             set {
                 if (totalDifferenceSum != value) {
-                    totalDifferenceSum = value;
+                    totalDifferenceSum = decimal.Round(value);
                     OnPropertyChanged("TotalDifferenceSum");
                 }
             }

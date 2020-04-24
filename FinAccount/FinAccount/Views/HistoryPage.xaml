@@ -49,18 +49,18 @@
                                 <ViewCell.View>
                                     <Grid>
                                         <Label Text="{Binding Name}"
-                                               FontSize="Large"
+                                               FontSize="Medium"
                                                Grid.Column="0"/>
                                         <Label Text="{Binding PositiveSum}"
-                                               FontSize="Large"
+                                               FontSize="Medium"
                                                TextColor="Green"
                                                Grid.Column="1"/>
                                         <Label Text="{Binding NegativeSum}"
-                                               FontSize="Large"
+                                               FontSize="Medium"
                                                TextColor="Red"
                                                Grid.Column="2"/>
                                         <Label Text="{Binding DiffSum}"
-                                               FontSize="Large"
+                                               FontSize="Medium"
                                                TextColor="Blue"
                                                Grid.Column="3"/>
                                     </Grid>
