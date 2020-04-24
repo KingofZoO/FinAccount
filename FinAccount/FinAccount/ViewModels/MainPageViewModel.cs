@@ -76,7 +76,7 @@ namespace FinAccount.ViewModels {
                 if(totalSum != value) {
                     totalSum = decimal.Round(value);
                     OnPropertyChanged("TotalSum");
-                    App.Current.Properties[totalSumPropName] = value;
+                    App.Current.Properties[totalSumPropName] = totalSum;
                 }
             }
         }
